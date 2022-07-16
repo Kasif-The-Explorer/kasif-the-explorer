@@ -48,17 +48,17 @@
       "window": {
         "all": false,
         "center": false,
-        "close": false,
+        "close": true,
         "create": false,
         "hide": false,
-        "maximize": false,
-        "minimize": false,
+        "maximize": true,
+        "minimize": true,
         "print": false,
-        "requestUserAttention": false,
+        "requestUserAttention": true,
         "setAlwaysOnTop": false,
         "setDecorations": false,
         "setFocus": false,
-        "setFullscreen": false,
+        "setFullscreen": true,
         "setIcon": false,
         "setMaxSize": false,
         "setMinSize": false,
@@ -66,11 +66,11 @@
         "setResizable": false,
         "setSize": false,
         "setSkipTaskbar": false,
-        "setTitle": false,
+        "setTitle": true,
         "show": false,
         "startDragging": true,
-        "unmaximize": false,
-        "unminimize": false
+        "unmaximize": true,
+        "unminimize": true
       }
     },
     "bundle": {

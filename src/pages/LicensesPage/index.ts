@@ -1,0 +1,1 @@
+export { LicensesPage } from "./LicensesPage"

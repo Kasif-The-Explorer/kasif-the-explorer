@@ -1,20 +1,17 @@
 {
-  "extends": [
-    "development"
-  ],
-  "browserslist": [
-    "defaults",
-    "not ie 11",
-    "not samsung <= 17"
-  ],
+  "extends": ["development"],
+  "browserslist": ["defaults", "not ie 11", "not samsung <= 17"],
   "hints": {
+    "no-inline-styles": [
+      "default",
+      {
+        "requireNoStyleElement": true
+      }
+    ],
     "compat-api/css": [
       "default",
       {
-        "ignore": [
-          "-webkit-text-size-adjust",
-          "color-scheme"
-        ]
+        "ignore": ["-webkit-text-size-adjust", "color-scheme"]
       }
     ]
   }
