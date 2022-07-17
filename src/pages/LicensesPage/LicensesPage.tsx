@@ -1,5 +1,5 @@
-import { sendAsyncMessage } from "@hooks/useSendMessage";
 import { Title, Stack, Tooltip, Accordion, Group, Badge, ActionIcon } from "@mantine/core";
+import { invoke } from "@tauri-apps/api";
 import { useCallback } from "react";
 import { BrandGit } from "tabler-icons-react";
 import { licenses } from "./licenses";
@@ -7,7 +7,7 @@ import { licenses } from "./licenses";
 export function LicensesPage() {
   const handleRepoClick = useCallback((e: MouseEvent, link: string) => {
     e.stopPropagation();
-    sendAsyncMessage("open-file", { path: link });
+    invoke("launch_file", { path: link });
   }, []);
 
   const buildLabel = useCallback((title: string, license: string, link: string) => {

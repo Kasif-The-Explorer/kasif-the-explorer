@@ -29,6 +29,7 @@
     "react-window": "^1.8.7",
     "recoil": "^0.7.0",
     "tabler-icons-react": "^1.44.0",
+    "tauri-plugin-store-api": "https://github.com/tauri-apps/tauri-plugin-store\\#dev",
     "utility-types": "^3.10.0"
   },
   "devDependencies": {

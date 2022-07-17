@@ -1,6 +1,7 @@
 import { ActionIcon, Box, Center, ScrollArea, Text, SegmentedControl, Space, Tooltip } from "@mantine/core";
 import { style } from "./style";
 import { X } from "tabler-icons-react";
+// @ts-ignore
 import { useDrag, useDrop } from "react-dnd";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -82,7 +83,7 @@ export function TabController() {
           onChange={(value) => setSelectedView(findView(value))}
           value={selectedView.id}
           sx={(theme) => ({
-            backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+            backgroundColor: "transparent",
             "& .mantine-SegmentedControl-active": {
               boxShadow: "none",
               backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[1],

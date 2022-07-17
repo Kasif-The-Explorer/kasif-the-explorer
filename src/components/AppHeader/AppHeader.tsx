@@ -11,16 +11,14 @@ import {
   UnstyledButton,
   useMantineTheme,
 } from "@mantine/core";
-import { evironmentStoreState } from "@store/evironmentStore";
 import { appWindow } from "@tauri-apps/api/window";
-import { useRecoilValue } from "recoil";
 import icon from "@img/favicon.png";
 import { useState, useCallback, useMemo } from "react";
-import { usePlatform } from "@hooks/environment";
+import { setPersistentData } from "@/persistentData";
+import { appDir } from '@tauri-apps/api/path';
 
 export function AppHeader() {
   const theme = useMantineTheme();
-  const platform = usePlatform();
   const [popoverOpened, setPopoverOpened] = useState(false);
 
   const windowActionSx: CSSObject = useMemo(
@@ -106,7 +104,7 @@ export function AppHeader() {
             <div style={{ display: "flex", alignItems: "center" }}>
               <Image src={icon} width={30} height={30} sx={{ minWidth: 30 }} mr="md" />
               <Text color="dimmed" size="sm">
-                {platform || ""}
+                Kâşif the Explorer v0.1.0
               </Text>
             </div>
           </Popover>
@@ -118,7 +116,12 @@ export function AppHeader() {
             <UnstyledButton onClick={() => appWindow.toggleMaximize()} ml={1} sx={basicActionSx}>
               &#x25FB;
             </UnstyledButton>
-            <UnstyledButton onClick={() => appWindow.close()} ml={1} sx={closeActionSx}>
+            <UnstyledButton onClick={async () => {
+              // await setPersistentData("localStorage", "hello")
+              // const appDirPath = await appDir();
+              // console.log("closing", appDirPath);
+              appWindow.close()
+            }} ml={1} sx={closeActionSx}>
               &#x2715;
             </UnstyledButton>
           </Group>

@@ -66,9 +66,11 @@ export function ContextMenu() {
   }, []);
 
   useEffect(() => {
+    // @ts-expect-error
     document.addEventListener("app-context-menu", handler);
 
     return () => {
+      // @ts-expect-error
       document.removeEventListener("app-context-menu", handler);
     };
   }, []);

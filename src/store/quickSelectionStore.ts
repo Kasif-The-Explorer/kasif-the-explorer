@@ -1,10 +1,10 @@
 import { randomId, useLocalStorage } from "@mantine/hooks";
 import { getSvgImportPath, findIconForContent, findKindForContent } from "@util/misc";
-import { sendAsyncMessage } from "@hooks/useSendMessage";
 import { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 import { View, ViewContent } from "./viewStore";
 import path from "path-browserify";
+import { BaseDirectory, readDir } from "@tauri-apps/api/fs";
 
 export interface QuickSelectionState {
   main: View[];
@@ -35,7 +35,46 @@ function partialViewContentToViewContent(partial: PartialViewContent): ViewConte
 }
 
 export async function getQuickSelectionItems(pinned: string[], recent: string[]): Promise<QuickSelectionState> {
-  return { main: [], pinned: [], recent: [] };
+  const desktop = await readDir("", { dir: BaseDirectory.Desktop, recursive: false });
+  console.log(desktop);
+
+  return {
+    main: [
+      {
+        label: "Recent",
+        icon: getSvgImportPath("folder-mjml"),
+        path: "Recent",
+        id: "Recent",
+        type: "folder",
+        content: [
+          {
+            label: "test 1",
+            icon: getSvgImportPath("audio"),
+            path: "C:/Users/tmwwd/Music/Music/Unfinished/snow.mp3",
+            id: "test1",
+            type: "file",
+            kind: "Mp3 File",
+            modificationDate: new Date(),
+            contentSize: 0,
+          },
+          {
+            label: "test 2",
+            icon: getSvgImportPath("audio"),
+            path: "C:/Users/tmwwd/Music/Music/Unfinished/prev album.mp3",
+            id: "test2",
+            type: "file",
+            kind: "Mp3 File",
+            modificationDate: new Date(),
+            contentSize: 0,
+          },
+        ],
+        history: [],
+        popped: [],
+      },
+    ],
+    pinned: [],
+    recent: [],
+  };
   // return new Promise(async (resolve) => {
   //   const quickSelectionMainItems: View[] = [];
   //   const quickSelectionPinnedItems: View[] = [];

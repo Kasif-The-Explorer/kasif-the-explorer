@@ -2,3 +2,80 @@ body {
   background-color: transparent;
   margin: 0;
 }
+
+:root {
+  --selection-color: #d0e9f2;
+  --scrollbar-track-color: #ffffff;
+  --scrollbar-thumb-color: #ffffff;
+  --blur-background-color: rgba(26, 27, 30, 0.6);
+}
+
+main,
+nav,
+.app {
+  background-color: var(--blur-background-color) !important;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+* {
+  user-select: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+*::selection {
+  background-color: var(--selection-color);
+}
+
+.mantine-ScrollArea-scrollbar[data-orientation="horizontal"] {
+  height: 8px;
+  bottom: -4px !important;
+}
+
+.draggable:active {
+  cursor: move;
+}
+
+table {
+  margin: 0 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  height: var(--radix-scroll-area-thumb-height);
+  transform: translate3d(0px, 0px, 0px);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover-color);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: var(--scrollbar-track-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: 8px;
+}

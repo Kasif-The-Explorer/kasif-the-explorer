@@ -11,6 +11,7 @@ import { appSettingsStoreState } from "@store/settingsStore";
 import { Input, ScrollArea } from "@mantine/core";
 import { ContentActions } from "@components/ContentActions";
 import { DragItemTypes } from "@util/actionTypes";
+// @ts-ignore
 import { DragPreviewImage, useDrag, useDrop } from "react-dnd";
 import { clipboardStoreState } from "@store/clipboardStore";
 import { useMenuStates, useContextMenu } from "@store/contextMenuStore";

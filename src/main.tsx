@@ -22,6 +22,7 @@ import { AppSettings, appSettingsStoreState, defaultAppSettings } from "@store/s
 import { CustomSpotlightAction, CustomActionsWrapper } from "@components/CustomSpotlightAction";
 import { InfoModal } from "@components/Modals";
 import App from "./App";
+import { appWindow } from "@tauri-apps/api/window";
 
 type ColorScheme = "dark" | "light";
 type Color = [string, string, string, string, string, string, string, string, string, string];
@@ -42,13 +43,15 @@ function setCssVariables(colorScheme: ColorScheme, theme: MantineTheme) {
       root.style.setProperty("--scrollbar-track-color", theme.colors.dark[8]);
       root.style.setProperty("--scrollbar-thumb-color", theme.fn.rgba("#ffffff", 0.4));
       root.style.setProperty("--scrollbar-thumb-hover-color", theme.fn.rgba("#ffffff", 0.5));
+      root.style.setProperty("--blur-background-color", theme.fn.rgba(theme.colors.dark[7], 1));
       break;
-    case "light":
+      case "light":
       selectionColor = theme.fn.rgba(colors.blue[0], 0.7);
       root.style.setProperty("--selection-color", selectionColor);
       root.style.setProperty("--scrollbar-track-color", theme.colors.gray[0]);
       root.style.setProperty("--scrollbar-thumb-color", theme.fn.rgba("#000000", 0.4));
       root.style.setProperty("--scrollbar-thumb-hover-color", theme.fn.rgba("#000000", 0.5));
+      root.style.setProperty("--blur-background-color", theme.fn.rgba(theme.white, 1));
       break;
   }
 }

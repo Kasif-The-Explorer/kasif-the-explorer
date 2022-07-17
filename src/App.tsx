@@ -7,18 +7,14 @@ import { viewAnimationStore } from "@hooks/useTransition";
 import { useRecoilState } from "recoil";
 import { useMantineTheme } from "@mantine/core";
 import { useCallback, useEffect, useState } from "react";
-import { evironmentStoreState } from "@store/evironmentStore";
-import { useEnvironment } from "@hooks/environment";
 import { getQuickSelectionItems, quickSelectionState } from "@store/quickSelectionStore";
 import { boardSettingsStoreState } from "@store/settingsStore";
 
 function App() {
   const [, setViewAnimationId] = useRecoilState(viewAnimationStore);
   const theme = useMantineTheme();
-  const environment = useEnvironment();
   const [ready, setReady] = useState(false);
   const [, setQuickSelectionState] = useRecoilState(quickSelectionState);
-  const [, setCurrentEnvironment] = useRecoilState(evironmentStoreState);
   const [pinnedItems, setPinnedItems] = useLocalStorageValue<string[]>({
     key: "pinned-items",
     defaultValue: [],
@@ -36,10 +32,6 @@ function App() {
   ]);
 
   useEffect(() => {
-    setCurrentEnvironment(environment);
-  }, [environment]);
-
-  useEffect(() => {
     if (
       JSON.stringify(pinnedItems) !== JSON.stringify(boardSettings.pinned) ||
       JSON.stringify(recentItems) !== JSON.stringify(boardSettings.recent)
@@ -54,14 +46,12 @@ function App() {
   }, [boardSettings]);
 
   useEffect(() => {
-    if (environment !== "web") {
-      getQuickSelectionItems(boardSettings.pinned, boardSettings.recent).then((items) => {
-        setQuickSelectionState(items);
-        setReady(true);
-      });
-    }
+    getQuickSelectionItems(boardSettings.pinned, boardSettings.recent).then((items) => {
+      setQuickSelectionState(items);
+      setReady(true);
+    });
     setReady(true);
-  }, [environment, boardSettings]);
+  }, [boardSettings]);
 
   return (
     <div

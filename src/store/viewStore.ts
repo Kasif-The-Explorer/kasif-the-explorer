@@ -1,7 +1,6 @@
 import { randomId, useLocalStorageValue } from "@mantine/hooks";
 import { WelcomePage } from "@pages/WelcomePage";
 import { findIconForContent, findKindForContent, getContentScrollY, getSvgImportPath } from "@util/misc";
-import { sendAsyncMessage } from "@hooks/useSendMessage";
 import React, { useCallback } from "react";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 import { AppWindow } from "tabler-icons-react";
@@ -9,6 +8,7 @@ import { fileSelectionState } from "./fileSelectionStore";
 import { PartialViewContent } from "./quickSelectionStore";
 import path from "path-browserify";
 import { boardSettingsStoreState } from "./settingsStore";
+import { invoke } from "@tauri-apps/api";
 
 export interface ViewContent {
   label: string;
@@ -177,26 +177,27 @@ export function useSetSelectedView(): (view: View) => void {
 }
 
 export async function createViewFromPath(viewPath: string): Promise<View> {
-  const result = await sendAsyncMessage("read-folder", { path: viewPath });
-  const content = result.message;
-  const parsed = path.parse(viewPath);
-  const label = parsed.base + parsed.ext;
+  // const result = await sendAsyncMessage("read-folder", { path: viewPath });
+  // const content = result.message;
+  // const parsed = path.parse(viewPath);
+  // const label = parsed.base + parsed.ext;
 
   return {
-    label: label,
-    icon: findIconForContent("folder", label),
+    label: "label",
+    icon: findIconForContent("folder", "label"),
     path: viewPath,
     id: randomId(),
     type: "folder",
     history: [],
     popped: [],
-    content: content.map((item: PartialViewContent) => ({
-      ...item,
-      id: randomId(),
-      modificationDate: new Date(item.modificationDate),
-      kind: findKindForContent(item.type, item.label),
-      icon: findIconForContent(item.type, item.label),
-    })),
+    content: [],
+    // content: content.map((item: PartialViewContent) => ({
+    //   ...item,
+    //   id: randomId(),
+    //   modificationDate: new Date(item.modificationDate),
+    //   kind: findKindForContent(item.type, item.label),
+    //   icon: findIconForContent(item.type, item.label),
+    // })),
   };
 }
 
@@ -211,7 +212,7 @@ export function useOpenViewContent(): (content: Pick<ViewContent, "path" | "type
           goto(content.path, "direct");
           break;
         case "file":
-          sendAsyncMessage("open-file", { path: content.path });
+          invoke("launch_file", { path: content.path });
           break;
       }
     },
